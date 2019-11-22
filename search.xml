@@ -42,42 +42,4 @@
         <tag>生活</tag>
       </tags>
   </entry>
-  <entry>
-    <title>手写函数防抖和函数节流</title>
-    <url>/2019/01/08/%E8%8A%82%E6%B5%81%E5%92%8C%E9%98%B2%E6%8A%96/</url>
-    <content><![CDATA[<p> 近几日的optionslodash安全漏洞 问题今天和大家探讨探讨函数防抖和节流：</p>
-<ul>
-<li>函数防抖：在规定时间内，再次执行，清除上一次执行，重新执行。<ul>
-<li>lodash提供 <a href="https://www.lodashjs.com/docs/latest#debouncefunc-wait0-options" target="_blank" rel="noopener">debounce</a>  </li>
-</ul>
-</li>
-<li>函数节流：在规定时间内，再次执行，必须等上一次执行完毕，才能执行。<ul>
-<li>lodash提供 <a href="https://www.lodashjs.com/docs/latest#_throttlefunc-wait0" target="_blank" rel="noopener">throttle</a>  </li>
-</ul>
-</li>
-<li>options<a href="https://www.infoq.cn/article/k7C-ZvXKOHh284ToEy9K" target="_blank" rel="noopener">lodash安全漏洞</a>   如果只是个别功能，建议自己实现。（有兴趣的朋友可以去看看哦）</li>
-</ul>
-<h2 id="手写函数防抖和函数节流"><a href="#手写函数防抖和函数节流" class="headerlink" title="手写函数防抖和函数节流"></a>手写函数防抖和函数节流</h2><h3 id="函数节流"><a href="#函数节流" class="headerlink" title="函数节流"></a>函数节流</h3><p>函数节流是让这个函数在间隔一段时间执行一次</p>
-<p> 以输入框为例，假设你想查询xxxx，你想实现当我们开始输入多少秒之后，执行查询操作。（并不一定要输入完毕）</p>
-<p>核心是去判断当前时间和开始时间的间隔是否到达了设置的delay值，如果到达了，就执行一次回调，没有则不执行。</p>
-<h3 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h3><p>让这个函数在指向上一次之后过了你规定的时间在执行的一种方法；</p>
-<p>核心在于每次都去clear一个延时器，然后每次执行的函数的时候，都去clear之前的延时器。只有你中断的时候，才会去执行相应回调</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">method,context</span>)</span>&#123;</span><br><span class="line">    cleatTimeout(method,tId)</span><br><span class="line">    method.tId = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        method.call(context)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><hr>
-<p>节流是高频事件触发，但是n秒内会执行一次，所以节流会稀释函数的执行频率</p>
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>每次触发事件时都判断当前是否有等待执行的延时函数</p>
-<h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><hr>
-<p>触发高频事件后n秒内函数执行一次，如果n秒内高频事件再次被触发，则重新计算时间。（销毁定时器）</p>
-<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><p>每次触发事件时都取消之前的延时调用方法</p>
-<h3 id="封装节流和防抖，通过第三参数来切换模式"><a href="#封装节流和防抖，通过第三参数来切换模式" class="headerlink" title="封装节流和防抖，通过第三参数来切换模式"></a>封装节流和防抖，通过第三参数来切换模式</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> throttle = <span class="function"><span class="keyword">function</span>(<span class="params">fn,delay,isDebounce</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer </span><br><span class="line">    <span class="keyword">let</span> lastCall = <span class="number">0</span></span><br><span class="line">    retrun <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(isDebounce) &#123;</span><br><span class="line">             <span class="keyword">if</span>(timer) clearTimeout(timet)</span><br><span class="line">                timet = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                fn(...args)</span><br><span class="line">              &#125;,delay)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">            <span class="keyword">if</span>(now - lastCall &lt; delay) <span class="keyword">return</span></span><br><span class="line">            lastCall = now</span><br><span class="line">            fn(...args)</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>美好</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
 </search>
