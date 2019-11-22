@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Hello World | Web Of Love</title>
+  <title>手写函数防抖和函数节流 | Web Of Love</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Lgq-Yc">
   <meta name="keywords" content="js, css, jquery, ajax, node.js">
@@ -65,9 +65,9 @@
   <div class="overlay">
   <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
-    <span>2019-09-21</span>
-    <h2>Hello World</h2>
-    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="../../../../tags/生活/">生活</a></div>
+    <span>2019-01-08</span>
+    <h2>手写函数防抖和函数节流</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="../../../../tags/js/">js</a></div>
     <div class="social-links">
 <a href="https://github.com/lgqyc1212" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="https://weibo.com/7292824407/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank"><i class="fa fa-weibo fa-fw"></i></a>
 </div></div>
@@ -78,19 +78,33 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p> 近几日的optionslodash安全漏洞 问题今天和大家探讨探讨函数防抖和节流：</p>
+<ul>
+<li>函数防抖：在规定时间内，再次执行，清除上一次执行，重新执行。<ul>
+<li>lodash提供 <a href="https://www.lodashjs.com/docs/latest#debouncefunc-wait0-options" target="_blank" rel="noopener">debounce</a>  </li>
+</ul>
+</li>
+<li>函数节流：在规定时间内，再次执行，必须等上一次执行完毕，才能执行。<ul>
+<li>lodash提供 <a href="https://www.lodashjs.com/docs/latest#_throttlefunc-wait0" target="_blank" rel="noopener">throttle</a>  </li>
+</ul>
+</li>
+<li>options<a href="https://www.infoq.cn/article/k7C-ZvXKOHh284ToEy9K" target="_blank" rel="noopener">lodash安全漏洞</a>   如果只是个别功能，建议自己实现。（有兴趣的朋友可以去看看哦）</li>
+</ul>
+<h2 id="手写函数防抖和函数节流"><a href="#手写函数防抖和函数节流" class="headerlink" title="手写函数防抖和函数节流"></a>手写函数防抖和函数节流</h2><h3 id="函数节流"><a href="#函数节流" class="headerlink" title="函数节流"></a>函数节流</h3><p>函数节流是让这个函数在间隔一段时间执行一次</p>
+<p> 以输入框为例，假设你想查询xxxx，你想实现当我们开始输入多少秒之后，执行查询操作。（并不一定要输入完毕）</p>
+<p>核心是去判断当前时间和开始时间的间隔是否到达了设置的delay值，如果到达了，就执行一次回调，没有则不执行。</p>
+<h3 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h3><p>让这个函数在指向上一次之后过了你规定的时间在执行的一种方法；</p>
+<p>核心在于每次都去clear一个延时器，然后每次执行的函数的时候，都去clear之前的延时器。只有你中断的时候，才会去执行相应回调</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">method,context</span>)</span>&#123;</span><br><span class="line">    cleatTimeout(method,tId)</span><br><span class="line">    method.tId = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        method.call(context)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><hr>
+<p>节流是高频事件触发，但是n秒内会执行一次，所以节流会稀释函数的执行频率</p>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>每次触发事件时都判断当前是否有等待执行的延时函数</p>
+<h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><hr>
+<p>触发高频事件后n秒内函数执行一次，如果n秒内高频事件再次被触发，则重新计算时间。（销毁定时器）</p>
+<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><p>每次触发事件时都取消之前的延时调用方法</p>
+<h3 id="封装节流和防抖，通过第三参数来切换模式"><a href="#封装节流和防抖，通过第三参数来切换模式" class="headerlink" title="封装节流和防抖，通过第三参数来切换模式"></a>封装节流和防抖，通过第三参数来切换模式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> throttle = <span class="function"><span class="keyword">function</span>(<span class="params">fn,delay,isDebounce</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer </span><br><span class="line">    <span class="keyword">let</span> lastCall = <span class="number">0</span></span><br><span class="line">    retrun <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(isDebounce) &#123;</span><br><span class="line">             <span class="keyword">if</span>(timer) clearTimeout(timet)</span><br><span class="line">                timet = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                fn(...args)</span><br><span class="line">              &#125;,delay)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">            <span class="keyword">if</span>(now - lastCall &lt; delay) <span class="keyword">return</span></span><br><span class="line">            lastCall = now</span><br><span class="line">            fn(...args)</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       </div>
     </div>
@@ -99,12 +113,12 @@
 <div class="lx-navigation">
 	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
 		<div class="overlay"></div>
-		<a class="copy" href="../../../11/17/你好世界/">
+		<a class="copy" href="../../../09/21/hello-world/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>你好</h3>
+						<h3>Hello W...</h3>
 					</div>
 				</div>
 			</div>
@@ -112,12 +126,12 @@
 	</div>
         <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
 		<div class="overlay"></div>
-		<a class="copy" href="../../../01/08/节流和防抖/">
+		<a class="copy" href="#">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>手写函数防抖和...</h3>
+						<h3>没有更早的文章</h3>
 					</div>
 				</div>
 			</div>
