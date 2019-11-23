@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>前后端交互方式 | Web Of Love</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Lgq-Yc">
+  <meta name="keywords" content="js, css, jquery, ajax, node.js">
+  <meta name="description" content="A simple & clear & elegant Code introduce">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.0.0',
+    localsearch:{
+      "enable": true,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'search.xml'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicons.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "greenish",
+	     });
+	}); 
+	</script>
+  <!--Google_Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=..."></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '...');
+</script>
+<!--baidu_analytics-->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?...";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2019-01-08</span>
+    <h2>前后端交互方式</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="../../../../tags/js/">js</a></div>
+    <div class="social-links">
+<a href="https://github.com/lgqyc1212" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="https://weibo.com/7292824407/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank"><i class="fa fa-weibo fa-fw"></i></a>
+</div></div>
+</div>
+</div>
+
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <h1 id="1、前后端交互的方式"><a href="#1、前后端交互的方式" class="headerlink" title="1、前后端交互的方式"></a>1、前后端交互的方式</h1><p>关于前后端交互的方式，应该是每个前端人员都应该掌握的技术，他是难点，同样也是重点。</p>
+<p>交互就是很多互联网平台追求打造的一个功能状态。通过某个具有交互功能的互联网平台，让用户在上面不仅可以获得相关资讯、信息或服务，还能使用户与用户之间或用户与平台之间相互交流与互动，从而碰撞出更多的创意、思想和需求等。</p>
+<p>交互 是指替换；互相；彼此。语出《京氏易传·震》：“震分阴阳，交互用事。”。。。</p>
+<p>话说多了下面让开始探讨把，</p>
+<h2 id="像发送HTTP请求有很多种方法，比如："><a href="#像发送HTTP请求有很多种方法，比如：" class="headerlink" title="像发送HTTP请求有很多种方法，比如："></a>像发送HTTP请求有很多种方法，比如：</h2><ul>
+<li>用form可以发送请求，但是会刷新页面或新开页面；</li>
+<li>用a可以发 get请求，但是也是会刷新页面或新开窗口；</li>
+<li>用img可以发get请求，但是只能以图片的形式展示；</li>
+<li>用link可以发 get请求，但是只能以css、favicon的形式展示；</li>
+<li>用script 可以发get请求，但是只能以脚本的形式运行</li>
+</ul>
+<h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><p>jsonp即”json padding“，当两个网站（如x.com访问y.com ,不同域）之间需要访问，可以通过script作用交互方式，具体过程为：</p>
+<ul>
+<li>请求方（<code>x.com</code>前端）定义一个发送请求成功/失败后执行的函数f（回调函数，即使用方法提供函数给对方调用）；</li>
+<li>请求方动态创建script（添加到body），其src指向响应方url（<code>y.com</code>后端），同时将回调函数名作为参数传递，即<code>http://y.com?callback=f</code>;</li>
+<li>响应方法接收请求，根据查询参数f和返回的数据、构造调用这函数的javaScript代码字符串，形如<code>f.call(undefined,data)</code>或<code>f(data)</code>作为响应结果返回给请求方；</li>
+<li>请求方浏览器接收响应（一段js代码），被添加到body就会执行<code>f.call(undefined,data)</code>,从而获得需要的数据data；</li>
+</ul>
+<p>示例：JSONP请求</p>
+<p>​          请求方html</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    button.addEventListener(</span><br><span class="line">        <span class="string">'click'</span>, (e) =&gt; &#123;</span><br><span class="line">            <span class="keyword">let</span> functionName = <span class="string">'x'</span> + <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">10000</span>, <span class="number">10</span>)    <span class="comment">// 随机生成回调函数名称</span></span><br><span class="line">            <span class="built_in">window</span>[functionName] = <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (result === <span class="string">'success'</span>) &#123;</span><br><span class="line">                    <span class="comment">// ...</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>)</span><br><span class="line">            script.src = <span class="string">'http://y.com/?callback='</span> + functionName     <span class="comment">// 发送请求获取script</span></span><br><span class="line">            <span class="built_in">document</span>.body.appendChild(script)    <span class="comment">// 把script加入body中，自动执行</span></span><br><span class="line">            script.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">                e.currentTarget.remove()</span><br><span class="line">                <span class="keyword">delete</span> <span class="built_in">window</span>[functionName]</span><br><span class="line">            &#125;</span><br><span class="line">            script.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">                e.currentTarget.remove()</span><br><span class="line">                <span class="keyword">delete</span> <span class="built_in">window</span>[functionName]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以用jQuery：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'http://y.com/?callback='</span> + functionName,</span><br><span class="line">    dataType: <span class="string">'jsonp'</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(response === <span class="string">'success'</span>)&#123;</span><br><span class="line">           <span class="comment">// ...</span></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>让我们也看看后端接口的写法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = require(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line">app.get(<span class="string">'/gettime'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  let &#123; callback &#125; = req.query;</span><br><span class="line">  let data = JSON.stringfy( &#123;a:<span class="number">1</span>,b:<span class="number">2</span>&#125; )</span><br><span class="line">  res.end(`$&#123;callback&#125;($&#123;data&#125;)`)</span><br><span class="line">&#125;)</span><br><span class="line">    </span><br><span class="line">app.listen(<span class="number">3000</span>, () =&gt; &#123;</span><br><span class="line">  console.log(<span class="string">'你可以通过http://localhost:3000来访问...'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>(写过node的朋友是不是很熟悉)</p>
+<p>当然，后端框架中也有现成的解决方案，不要需要写的这么复杂。express框架已经提供了一个名为jsonp的方法来处理jsonp请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = require(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line">app.get(<span class="string">'/gettime'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  let data = &#123;a:<span class="number">1</span>,b:<span class="number">2</span>&#125;</span><br><span class="line">  res.jsonp(data)</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(<span class="number">3000</span>, () =&gt; &#123;</span><br><span class="line">  console.log(<span class="string">'你可以通过http://localhost:3000来访问...'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>送你们一段模拟代码（手写jsonp，不用客气）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>html页面<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>jsonp<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>需要后端接口的配合：http://localhost:3005/jsonp<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">pre</span>&gt;</span></span><br><span class="line">        //--后端测试代码如下</span><br><span class="line">          const express = require('express');</span><br><span class="line">          const app = express()</span><br><span class="line">          </span><br><span class="line">          // 留言板接口 -- 获取所有数据</span><br><span class="line">          app.get('/jsonp', (req, res) =&gt; &#123;</span><br><span class="line">            var &#123; callback &#125; = req.query;</span><br><span class="line">          </span><br><span class="line">            res.setHeader('content-type', 'application/javascript');</span><br><span class="line">          </span><br><span class="line">            res.end(callback + '(&#123;a:1,b:2&#125;)');</span><br><span class="line">          &#125;);</span><br><span class="line">          </span><br><span class="line">          app.listen(3000,()=&gt;&#123;&#125;)</span><br><span class="line">      <span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">buildCallBackFunction</span>(<span class="params">options, callbackFunName</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>[callbackFunName] = <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span></span><br><span class="line">          options.success(result);</span><br><span class="line"><span class="javascript">          <span class="built_in">window</span>[callbackFunName] = <span class="literal">null</span>;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">delete</span> <span class="built_in">window</span>[callbackFunName];</span></span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">buildParam</span>(<span class="params">options</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> params = options.params;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (!params) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> <span class="string">''</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (<span class="keyword">typeof</span> params === <span class="string">'object'</span>) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">var</span> arr = [];</span></span><br><span class="line"><span class="javascript">          <span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">in</span> params) &#123;</span></span><br><span class="line"><span class="javascript">            arr.push(<span class="string">`p=<span class="subst">$&#123;params[p]&#125;</span>`</span>);</span></span><br><span class="line">          &#125;</span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> arr.join(<span class="string">'&amp;'</span>);</span></span><br><span class="line"><span class="javascript">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> params === <span class="string">'string'</span>) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> params;</span></span><br><span class="line"><span class="javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> <span class="string">''</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">        </span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">buildScript</span>(<span class="params">url</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></span><br><span class="line"><span class="javascript">        script.setAttribute(<span class="string">'src'</span>, url);</span></span><br><span class="line"><span class="javascript">        script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].removeChild(script);</span></span><br><span class="line">        &#125;;</span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</span></span><br><span class="line">      &#125;</span><br><span class="line">        </span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">json</span>(<span class="params">options</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> &#123; url, params, success &#125; = options;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> callbackFunName = <span class="string">'callback_'</span> + <span class="built_in">Date</span>.now();</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> params = buildParam(options);</span></span><br><span class="line"><span class="javascript">        params += !params ? <span class="string">'callback='</span> + callbackFunName : <span class="string">'&amp;callback='</span> + callbackFunName;</span></span><br><span class="line"><span class="javascript">        url += <span class="string">'?'</span> + params;</span></span><br><span class="line">        buildCallBackFunction(options, callbackFunName);</span><br><span class="line">        buildScript(url);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      json(&#123;</span><br><span class="line"><span class="javascript">        url: <span class="string">'http://localhost:3005/jsonp/jsonp'</span>,</span></span><br><span class="line"><span class="javascript">        <span class="comment">// params: 'a=1&amp;b=2',</span></span></span><br><span class="line">        params: &#123; a: 1, b: 2 &#125;,</span><br><span class="line"><span class="javascript">        success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(result);</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>响应方node.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (path === <span class="string">'/'</span> &amp;&amp; method === <span class="string">'GET'</span>) &#123;</span><br><span class="line">    response.setHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/javascript'</span>)</span><br><span class="line">    response.write(<span class="string">`</span></span><br><span class="line"><span class="string">        <span class="subst">$&#123;query.callback&#125;</span>.call(undefined, 'success')</span></span><br><span class="line"><span class="string">    `</span>)</span><br><span class="line">    response.end()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一些细节：</p>
+<ul>
+<li>除了<code>&lt;a&gt;</code>标签外，<code>&lt;script&gt;</code>（只能以脚本形式运行）、<code>&lt;img&gt;</code>（只能展示为图片）都可以用作发请求（Http Headers<code>Content-Type</code>中的<code>image/jpg</code>、<code>text/jacascript</code>);</li>
+<li>发送请求、接收响应然后可以把数据填充到页面上，而不需要刷新整个页面；</li>
+<li>不同网站之间script访问不受限制（防盗链除外），因此可以在页面上<code>&lt;script src=&#39;xxx&#39;&gt;&lt;/script&gt;</code>引用script并自动执行，JSON也常被用作前后端数据交互的方式；</li>
+<li>请求方动态创建回调函数，名称一般使用随机数、执行后销毁、避免污染命名空间，而且执行成功/失败后会从页面上把script删除；</li>
+<li>由于页面上执行的逻辑完全由请求方前端实现，响应方后端只需要写好执行回调函数的字符串（函数名称为请求参数）、填充返回的数据即可，实现了前后端解耦；</li>
+<li>由于JSONP是通过动态创建的script实现的，所以只支持get请求，且只能为脚本形式运行。</li>
+</ul>
+<hr>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><p><strong>同源策略</strong></p>
+<ul>
+<li>只有协议+端口+域名完全一样，浏览器才允许发送XMLHttpRequest请求（可以发送请求，但不能获取响应）；</li>
+<li>CORS（Cross-Origin Resource Sharing）跨域：要发送不同源（即协议、端口号、域名中一个或多个不同）请求，需要服务端配合，在响应头中加入<code>Access-Control-Allow-Origin</code>字段、内容为请求方域名即可放行。</li>
+</ul>
+<p>AJXA即“Asynchronous Jacascript And XML”，以XML和json格式作前后端交互，支持发送各种HTTP请求及任何形式展示响应，这个过程：</p>
+<ul>
+<li>使用XMLHttpRequest发送请求</li>
+<li>服务器返回XML/JSON格式字符串</li>
+<li>前端JavaScript解析XML，并更新局部页面。</li>
+</ul>
+<p>示例（发送XMLHttpRequest请求）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">'get'</span>,<span class="string">'http://x.com'</span>)</span><br><span class="line">request.onredystatechange = () =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (requset.readyState === <span class="number">4</span> &amp;&amp; request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">        let string = requst.responsrText</span><br><span class="line">        let object = window.JSON.parse(string)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">requst.send()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="xml"><a href="#xml" class="headerlink" title="xml"></a>xml</h2><p>目前已经很少用作前后端交互，前端js解析XML字符串：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let parser = <span class="keyword">new</span> DOMParser()</span><br><span class="line">let xmlDoc = parser.parserFromString(xmlSring)</span><br><span class="line"></span><br><span class="line"><span class="comment">//然后可以使用DOM API操作XML，很麻烦</span></span><br><span class="line">xmlDoc.getElementsByTagName(<span class="string">'heading'</span>)[<span class="number">0</span>].textContent</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p>json是一种类似JavaScript的数据格式化语言：</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>JavaScript</strong></th>
+<th><strong>JSON</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>未定义</td>
+<td><code>undefined</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>空</td>
+<td><code>null</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>数组</td>
+<td><code>[&#39;a&#39;,[&#39;b&#39;]]</code></td>
+<td><code>[&quot;a&quot;,&quot;b&quot;]</code></td>
+</tr>
+<tr>
+<td>函数</td>
+<td><code>function(){}</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>对象</td>
+<td><code>{&quot;name&quot;,&quot;lgq&quot;}</code></td>
+<td><code>{&quot;name&quot;,&quot;lgq&quot;}</code></td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><code>lgq</code></td>
+<td><code>lgq</code></td>
+</tr>
+<tr>
+<td>变量</td>
+<td><code>var a = {}; a.self = a</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>原型链</td>
+<td><code>{_proto_}</code></td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p>注意json字符串的表示必须用双引号，前端js解析JSON字符串：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let jsonObj = wiodiw,JSON.parse(jsonnString)  <span class="comment">// 返回JS对应类型的变量</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="实现AJAX"><a href="#实现AJAX" class="headerlink" title="实现AJAX"></a>实现AJAX</h2><p><strong>HTTP请求设置</strong></p>
+<p>request line</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.open(<span class="string">'post'</span>,<span class="string">'/xxx'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>request headers</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.setRequestHeader(<span class="string">'Content-Type'</span>,<span class="string">'x-www-form-urlencoded'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>request  playload (get 请求默认不显示)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.send(<span class="string">'lgq 18'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>HTTP响应读取</strong></p>
+<p>request line （注意状态码不代表返回信息，即使是404也有可能带响应）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> status = request.status</span><br><span class="line"><span class="keyword">let</span> statusText = request.statusText</span><br></pre></td></tr></table></figure>
+
+<p>response headers</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> headers = request.getAllResponseHeaders()</span><br><span class="line"><span class="keyword">let</span> contentType = request.getResponseHeader(<span class="string">'Content-Type'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>response body</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> body = request.responseText</span><br></pre></td></tr></table></figure>
+
+<p><strong>模拟jQuery发送HTTP请求</strong></p>
+<p>前面提到使用原生js自行实现jQuery：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">nodesOrSelector</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判断传入的是节点还是选择器字符串，转换成统一的对象（伪数组）</span></span><br><span class="line">    <span class="keyword">let</span> nodes = &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> nodesOrSelector === <span class="string">'string'</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = <span class="built_in">document</span>.querySelectorAll(nodesOrSelector)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; temp.length; i++) &#123;</span><br><span class="line">            nodes[i] = temp[i]</span><br><span class="line">        &#125;</span><br><span class="line">        nodes.length = temp.length</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (nodesOrSelector <span class="keyword">instanceof</span> Node) &#123;</span><br><span class="line">        nodes = &#123;</span><br><span class="line">            <span class="number">0</span>: nodesOrSelector,</span><br><span class="line">            length: <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nodes</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.$ = jQuery    <span class="comment">// 起别名</span></span><br><span class="line"><span class="keyword">var</span> node = $(item)    <span class="comment">// 返回一个对象，内部封装了多个函数</span></span><br></pre></td></tr></table></figure>
+
+<p>把AJAX封装为jQuery一个函数来调用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$.ajax = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> url    <span class="comment">// 接受两种形式的参数：(url, options)或(options)（options中包含url）</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">arguments</span>.length === <span class="number">1</span>) &#123;</span><br><span class="line">        url = options.url</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        url = <span class="built_in">arguments</span>[<span class="number">0</span>]</span><br><span class="line">        options = <span class="built_in">arguments</span>[<span class="number">1</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> method = options.method</span><br><span class="line">    <span class="keyword">let</span> headers = options.headers</span><br><span class="line">    <span class="keyword">let</span> body = options.body</span><br><span class="line">    <span class="keyword">let</span> success = options.success</span><br><span class="line">    <span class="keyword">let</span> fail = options.fail </span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> reqeust = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> headers) &#123;</span><br><span class="line">        request.setRequestHeader(key, headers[key])</span><br><span class="line">    &#125;</span><br><span class="line">    request.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (request.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">                success.call(<span class="literal">undefined</span>, request.responseText)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                fail.call(<span class="literal">undefined</span>, request)    </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    request.send(body)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">btn.addEventListener(<span class="string">'click'</span>, (e) =&gt; &#123;</span><br><span class="line">    <span class="built_in">window</span>.$.ajax(&#123;</span><br><span class="line">        url: <span class="string">'/xxx'</span>, </span><br><span class="line">        method: <span class="string">'get'</span>, </span><br><span class="line">        <span class="comment">// headers: '', </span></span><br><span class="line">        <span class="comment">// body: '', </span></span><br><span class="line">        success: <span class="function">(<span class="params">x</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(x)</span><br><span class="line">        &#125;, </span><br><span class="line">        fail: <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;    <span class="comment">// 注意箭头函数没有arguments</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用结构化参数，如果改由逐个参数传入存在问题：</span></span><br><span class="line"><span class="comment">// 封装后无法获取函数参数名称（应该传入什么？）；</span></span><br><span class="line"><span class="comment">// 没有默认参数，只能传入undefined/null占位（很难看）；</span></span><br></pre></td></tr></table></figure>
+
+<p>依然存在问题：调用函数依然依然需要通过文档获悉参数的名称，调用不方便</p>
+<p>使用Promise优化：then可以连续根据每次成功/失败处理后的结果，调用指定的函数做多次处理，而不需要把所有函数都封装在success/fail的函数中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$.ajax = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(    <span class="comment">// 返回Promise对象</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">arguments</span>.length === <span class="number">1</span>) &#123;</span><br><span class="line">                url = options.url</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                url = <span class="built_in">arguments</span>[<span class="number">0</span>]</span><br><span class="line">                options = <span class="built_in">arguments</span>[<span class="number">1</span>]</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">let</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">            request.open(options.method, url)</span><br><span class="line">            request.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (request.readyState === <span class="number">4</span>) &#123;    </span><br><span class="line">                    <span class="keyword">if</span> (request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">                        resolve.call(<span class="literal">undefined</span>, request.responseText)   <span class="comment">// 成功：对应Promise对象的第一个函数参数</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        reject.call(<span class="literal">undefined</span>, request)    <span class="comment">// 失败：对应Promise对象的第二个函数参数</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            request.send(options.body)</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="built_in">window</span>.$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'/xxx'</span>,</span><br><span class="line">    method: <span class="string">'get'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(</span><br><span class="line">    (text) =&gt; &#123;&#125;,          <span class="comment">// success</span></span><br><span class="line">    (request) =&gt; &#123;&#125;        <span class="comment">// fail</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="../节流和防抖/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>手写函数防抖和...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>没有更早的文章</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+<div class="comment"><div id="comments"></div></div>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">Web Of Love</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
+  </div>
+</footer>
+</div>
+<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+<div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="Lgq-Yc"></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Lgq-Yc</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="../../../../guestbook">留言</a></li>
+        <li><a href="../../../../about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/local.search.js"></script>
+<script src="//unpkg.com/valine"></script>
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'O5sae8CfOnXQaWGWP7hzQsul-gzGzoHsz',
+    appKey: 'BPWc4iQOeP1JKoJxEOmAbdvx',
+    placeholder: '此处留言',
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+  TeX: {
+          extensions: ["mhchem.js"]
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.5/latest.js?config=TeX-MML-AM_SVG"></script>
+</body>
+</html>
