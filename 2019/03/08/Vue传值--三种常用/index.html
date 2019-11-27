@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>jQuery的ajax链式编程方法 | Web Of Love</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Lgq-Yc">
+  <meta name="keywords" content="js, css, jquery, ajax, node.js">
+  <meta name="description" content="A simple & clear & elegant Code introduce">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.0.0',
+    localsearch:{
+      "enable": true,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'search.xml'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicons.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "greenish",
+	     });
+	}); 
+	</script>
+  <!--Google_Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=..."></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '...');
+</script>
+<!--baidu_analytics-->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?...";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2019-03-08</span>
+    <h2>jQuery的ajax链...</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="../../../../tags/jq/">jq</a></div>
+    <div class="social-links">
+<a href="https://github.com/lgqyc1212" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="https://weibo.com/7292824407/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank"><i class="fa fa-weibo fa-fw"></i></a>
+</div></div>
+</div>
+</div>
+
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <h1 id="Vue传值总结"><a href="#Vue传值总结" class="headerlink" title="Vue传值总结"></a>Vue传值总结</h1><p>常见的三种方法：</p>
+<p>自学的快乐，嘻嘻🤭。</p>
+<h2 id="父组件传值给子组件"><a href="#父组件传值给子组件" class="headerlink" title="父组件传值给子组件"></a>父组件传值给子组件</h2><p><strong>首先父组件发送的形式是用bind(用缩写:)绑定值到子组件身上。然后子组件用属性props接收。</strong></p>
+<p>父组件向子组件进行传值：</p>
+<p>父组件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> &lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    父组件:</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;name&quot;&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;!-- 引入子组件 --&gt;</span><br><span class="line">    &lt;child :inputName=&quot;name&quot;&gt;&lt;/child&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  import child from &apos;./child&apos;</span><br><span class="line">  export default &#123;</span><br><span class="line">    components: &#123;</span><br><span class="line">      child</span><br><span class="line">    &#125;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        name: &apos;&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>子组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">     &lt;div&gt;</span><br><span class="line">       子组件:</span><br><span class="line">       &lt;span&gt;&#123;&#123;inputName&#125;&#125;&lt;/span&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">   &lt;/template&gt;</span><br><span class="line">   &lt;script&gt;</span><br><span class="line">     export default &#123;</span><br><span class="line">       // 接受父组件的值</span><br><span class="line">       props: &#123;</span><br><span class="line">         inputName: String,</span><br><span class="line">         required: true</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="子组件传值父组件"><a href="#子组件传值父组件" class="headerlink" title="子组件传值父组件"></a>子组件传值父组件</h2><p>*<em>首先是子组件发送的形式是this.$emit(事件名,需要发送的值)，<code>事件名：父组件on监听的方法</code>，父组件第一件事就是监听子组件发送过来的事件名，@事件名=获取值的方法。<code>获取值的方法（值）</code>，就这样拿到了儿子发过来的值 *</em></p>
+<p>子组件向父组件传值:</p>
+<p>子组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">template&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            子组件:</span><br><span class="line">            &lt;span&gt;&#123;&#123;childValue&#125;&#125;&lt;/span&gt;</span><br><span class="line">            &lt;!-- 定义一个子组件传值的方法 --&gt;</span><br><span class="line">            &lt;input type=&quot;button&quot; value=&quot;点击触发&quot; @click=&quot;childClick&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/template&gt;</span><br><span class="line">        &lt;script&gt;</span><br><span class="line">          export default &#123;</span><br><span class="line">            data () &#123;</span><br><span class="line">              return &#123;</span><br><span class="line">                childValue: &apos;我是子组件的数据&apos;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods: &#123;</span><br><span class="line">              childClick () &#123;</span><br><span class="line">                // childByValue是在父组件on监听的方法</span><br><span class="line">                // 第二个参数this.childValue是需要传的值</span><br><span class="line">                this.$emit(&apos;childByValue&apos;, this.childValue)</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>父组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">  &lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    父组件:</span><br><span class="line">    &lt;span&gt;&#123;&#123;name&#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;!-- 引入子组件 定义一个on的方法监听子组件的状态--&gt;</span><br><span class="line">    &lt;child v-on:childByValue=&quot;childByValue&quot;&gt;&lt;/child&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  import child from &apos;./child&apos;</span><br><span class="line">  export default &#123;</span><br><span class="line">    components: &#123;</span><br><span class="line">      child</span><br><span class="line">    &#125;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        name: &apos;&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      childByValue: function (childValue) &#123;</span><br><span class="line">        // childValue就是子组件传过来的值</span><br><span class="line">        this.name = childValue</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="兄弟传值"><a href="#兄弟传值" class="headerlink" title="兄弟传值"></a>兄弟传值</h2><p><strong>两个都要引入公共js-&gt;bus。首先是发送者，this.$emit(名字，值)。然后是接受者,this.$on(“传过来的那个名字”，函数（值）)，这里要注意的是接受者的这个监听事件应该是放在钩子mounted事件内。同时注意this指向问题。（可用封装方法）</strong></p>
+<p>父组件向子组件进行传值：</p>
+<p>公共bus.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//bus.js</span><br><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">export default new Vue()</span><br></pre></td></tr></table></figure>
+
+<p>组件A：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    A组件:</span><br><span class="line">    &lt;span&gt;&#123;&#123;elementValue&#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;点击触发&quot; @click=&quot;elementByValue&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  // 引入公共的bug，来做为中间传达的工具</span><br><span class="line">  import Bus from &apos;./bus.js&apos;</span><br><span class="line">  export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        elementValue: 4</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      elementByValue: function () &#123;</span><br><span class="line">        Bus.$emit(&apos;val&apos;, this.elementValue)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>组件B：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">     &lt;div&gt;</span><br><span class="line">       B组件:</span><br><span class="line">       &lt;input type=&quot;button&quot; value=&quot;点击触发&quot; @click=&quot;getData&quot;&gt;</span><br><span class="line">       &lt;span&gt;&#123;&#123;name&#125;&#125;&lt;/span&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">   &lt;/template&gt;</span><br><span class="line">   &lt;script&gt;</span><br><span class="line">     import Bus from &apos;./bus.js&apos;</span><br><span class="line">     export default &#123;</span><br><span class="line">       data () &#123;</span><br><span class="line">         return &#123;</span><br><span class="line">           name: 0</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;,</span><br><span class="line">       mounted: function () &#123;</span><br><span class="line">         var vm = this</span><br><span class="line">         // 用$on事件来接收参数</span><br><span class="line">         Bus.$on(&apos;val&apos;, (data) =&gt; &#123;</span><br><span class="line">           console.log(data)</span><br><span class="line">           vm.name = data</span><br><span class="line">         &#125;)</span><br><span class="line">       &#125;,</span><br><span class="line">       methods: &#123;</span><br><span class="line">         getData: function () &#123;</span><br><span class="line">           this.name++</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>先这样，明日来一起学习vuex哦！</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>没有更新的文章</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="../../../01/08/节流和防抖/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>手写函数防抖和...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+<div class="comment"><div id="comments"></div></div>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">Web Of Love</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
+  </div>
+</footer>
+</div>
+<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+<div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="Lgq-Yc"></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Lgq-Yc</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="../../../../guestbook">留言</a></li>
+        <li><a href="../../../../about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/local.search.js"></script>
+<script src="//unpkg.com/valine"></script>
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'O5sae8CfOnXQaWGWP7hzQsul-gzGzoHsz',
+    appKey: 'BPWc4iQOeP1JKoJxEOmAbdvx',
+    placeholder: '此处留言',
+    avatar: 'identicon',
+    meta: guest,
+    pageSize: '10' || 10,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+  TeX: {
+          extensions: ["mhchem.js"]
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.5/latest.js?config=TeX-MML-AM_SVG"></script>
+</body>
+</html>

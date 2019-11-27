@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>你好</title>
-    <url>/2019/11/17/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/</url>
-    <content><![CDATA[<p>我这辈子没佩服过别人，除了它！！！</p>
-<h2 id="它最了不起的竟然是！！！"><a href="#它最了不起的竟然是！！！" class="headerlink" title="它最了不起的竟然是！！！"></a>它最了不起的竟然是！！！</h2><h3 id="啦啦啦"><a href="#啦啦啦" class="headerlink" title="啦啦啦"></a>啦啦啦</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">但少闲人如吾两人者耳</span><br></pre></td></tr></table></figure>
+    <title>jQuery的ajax链式编程方法</title>
+    <url>/2019/03/08/Vue%E4%BC%A0%E5%80%BC--%E4%B8%89%E7%A7%8D%E5%B8%B8%E7%94%A8/</url>
+    <content><![CDATA[<h1 id="Vue传值总结"><a href="#Vue传值总结" class="headerlink" title="Vue传值总结"></a>Vue传值总结</h1><p>常见的三种方法：</p>
+<p>自学的快乐，嘻嘻🤭。</p>
+<h2 id="父组件传值给子组件"><a href="#父组件传值给子组件" class="headerlink" title="父组件传值给子组件"></a>父组件传值给子组件</h2><p><strong>首先父组件发送的形式是用bind(用缩写:)绑定值到子组件身上。然后子组件用属性props接收。</strong></p>
+<p>父组件向子组件进行传值：</p>
+<p>父组件:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> &lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    父组件:</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;name&quot;&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;!-- 引入子组件 --&gt;</span><br><span class="line">    &lt;child :inputName=&quot;name&quot;&gt;&lt;/child&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  import child from &apos;./child&apos;</span><br><span class="line">  export default &#123;</span><br><span class="line">    components: &#123;</span><br><span class="line">      child</span><br><span class="line">    &#125;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        name: &apos;&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">i will give you a free miban</span><br></pre></td></tr></table></figure>
+<p>子组件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">     &lt;div&gt;</span><br><span class="line">       子组件:</span><br><span class="line">       &lt;span&gt;&#123;&#123;inputName&#125;&#125;&lt;/span&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">   &lt;/template&gt;</span><br><span class="line">   &lt;script&gt;</span><br><span class="line">     export default &#123;</span><br><span class="line">       // 接受父组件的值</span><br><span class="line">       props: &#123;</span><br><span class="line">         inputName: String,</span><br><span class="line">         required: true</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">quqiuba</span><br></pre></td></tr></table></figure>
+<h2 id="子组件传值父组件"><a href="#子组件传值父组件" class="headerlink" title="子组件传值父组件"></a>子组件传值父组件</h2><p>*<em>首先是子组件发送的形式是this.$emit(事件名,需要发送的值)，<code>事件名：父组件on监听的方法</code>，父组件第一件事就是监听子组件发送过来的事件名，@事件名=获取值的方法。<code>获取值的方法（值）</code>，就这样拿到了儿子发过来的值 *</em></p>
+<p>子组件向父组件传值:</p>
+<p>子组件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">template&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            子组件:</span><br><span class="line">            &lt;span&gt;&#123;&#123;childValue&#125;&#125;&lt;/span&gt;</span><br><span class="line">            &lt;!-- 定义一个子组件传值的方法 --&gt;</span><br><span class="line">            &lt;input type=&quot;button&quot; value=&quot;点击触发&quot; @click=&quot;childClick&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/template&gt;</span><br><span class="line">        &lt;script&gt;</span><br><span class="line">          export default &#123;</span><br><span class="line">            data () &#123;</span><br><span class="line">              return &#123;</span><br><span class="line">                childValue: &apos;我是子组件的数据&apos;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods: &#123;</span><br><span class="line">              childClick () &#123;</span><br><span class="line">                // childByValue是在父组件on监听的方法</span><br><span class="line">                // 第二个参数this.childValue是需要传的值</span><br><span class="line">                this.$emit(&apos;childByValue&apos;, this.childValue)</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">القرآن</span><br></pre></td></tr></table></figure>
+<p>父组件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  &lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    父组件:</span><br><span class="line">    &lt;span&gt;&#123;&#123;name&#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;!-- 引入子组件 定义一个on的方法监听子组件的状态--&gt;</span><br><span class="line">    &lt;child v-on:childByValue=&quot;childByValue&quot;&gt;&lt;/child&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  import child from &apos;./child&apos;</span><br><span class="line">  export default &#123;</span><br><span class="line">    components: &#123;</span><br><span class="line">      child</span><br><span class="line">    &#125;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        name: &apos;&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      childByValue: function (childValue) &#123;</span><br><span class="line">        // childValue就是子组件传过来的值</span><br><span class="line">        this.name = childValue</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2019/09/21/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="兄弟传值"><a href="#兄弟传值" class="headerlink" title="兄弟传值"></a>兄弟传值</h2><p><strong>两个都要引入公共js-&gt;bus。首先是发送者，this.$emit(名字，值)。然后是接受者,this.$on(“传过来的那个名字”，函数（值）)，这里要注意的是接受者的这个监听事件应该是放在钩子mounted事件内。同时注意this指向问题。（可用封装方法）</strong></p>
+<p>父组件向子组件进行传值：</p>
+<p>公共bus.js</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//bus.js</span><br><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">export default new Vue()</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>组件A：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    A组件:</span><br><span class="line">    &lt;span&gt;&#123;&#123;elementValue&#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;点击触发&quot; @click=&quot;elementByValue&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  // 引入公共的bug，来做为中间传达的工具</span><br><span class="line">  import Bus from &apos;./bus.js&apos;</span><br><span class="line">  export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        elementValue: 4</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      elementByValue: function () &#123;</span><br><span class="line">        Bus.$emit(&apos;val&apos;, this.elementValue)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>组件B：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">     &lt;div&gt;</span><br><span class="line">       B组件:</span><br><span class="line">       &lt;input type=&quot;button&quot; value=&quot;点击触发&quot; @click=&quot;getData&quot;&gt;</span><br><span class="line">       &lt;span&gt;&#123;&#123;name&#125;&#125;&lt;/span&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">   &lt;/template&gt;</span><br><span class="line">   &lt;script&gt;</span><br><span class="line">     import Bus from &apos;./bus.js&apos;</span><br><span class="line">     export default &#123;</span><br><span class="line">       data () &#123;</span><br><span class="line">         return &#123;</span><br><span class="line">           name: 0</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;,</span><br><span class="line">       mounted: function () &#123;</span><br><span class="line">         var vm = this</span><br><span class="line">         // 用$on事件来接收参数</span><br><span class="line">         Bus.$on(&apos;val&apos;, (data) =&gt; &#123;</span><br><span class="line">           console.log(data)</span><br><span class="line">           vm.name = data</span><br><span class="line">         &#125;)</span><br><span class="line">       &#125;,</span><br><span class="line">       methods: &#123;</span><br><span class="line">         getData: function () &#123;</span><br><span class="line">           this.name++</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>先这样，明日来一起学习vuex哦！</p>
 ]]></content>
       <categories>
         <category>美好</category>
       </categories>
       <tags>
-        <tag>生活</tag>
+        <tag>jq</tag>
       </tags>
   </entry>
   <entry>
@@ -86,7 +85,7 @@
     <content><![CDATA[<h1 id="1、前后端交互的方式"><a href="#1、前后端交互的方式" class="headerlink" title="1、前后端交互的方式"></a>1、前后端交互的方式</h1><p>关于前后端交互的方式，应该是每个前端人员都应该掌握的技术，他是难点，同样也是重点。</p>
 <p>交互就是很多互联网平台追求打造的一个功能状态。通过某个具有交互功能的互联网平台，让用户在上面不仅可以获得相关资讯、信息或服务，还能使用户与用户之间或用户与平台之间相互交流与互动，从而碰撞出更多的创意、思想和需求等。</p>
 <p>交互 是指替换；互相；彼此。语出《京氏易传·震》：“震分阴阳，交互用事。”。。。</p>
-<p>话说多了下面让开始探讨把，</p>
+<p>话说多了下面让开始探讨吧。</p>
 <h2 id="像发送HTTP请求有很多种方法，比如："><a href="#像发送HTTP请求有很多种方法，比如：" class="headerlink" title="像发送HTTP请求有很多种方法，比如："></a>像发送HTTP请求有很多种方法，比如：</h2><ul>
 <li>用form可以发送请求，但是会刷新页面或新开页面；</li>
 <li>用a可以发 get请求，但是也是会刷新页面或新开窗口；</li>
@@ -271,5 +270,22 @@
       <tags>
         <tag>jq</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>一个web前端的小朋友</title>
+    <url>/2018/01/01/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/</url>
+    <content><![CDATA[<p>我这辈子没佩服过别人，除了它！！！</p>
+<p>感谢朋友，这下有自己的田地了，我会在这片土地上勤勤恳恳耕耘，努力，学习，记忆，分享</p>
+<h2 id="未来如此美好，我们一起努力"><a href="#未来如此美好，我们一起努力" class="headerlink" title="未来如此美好，我们一起努力"></a>未来如此美好，我们一起努力</h2><h3 id="啦啦啦"><a href="#啦啦啦" class="headerlink" title="啦啦啦"></a>啦啦啦</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">但少闲人如吾两人者耳</span><br></pre></td></tr></table></figure>
+
+<h3 id="Serve-you"><a href="#Serve-you" class="headerlink" title="Serve you"></a>Serve you</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">i will give you a free data</span><br></pre></td></tr></table></figure>
+
+<p>可以来看我哦，另一面的我<a href="https://weibo.com/7292824407/profile?rightmod=1&wvr=6&mod=personinfo&sudaref=lgqyc1212.github.io&display=0&retcode=6102" target="_blank" rel="noopener">micro-blog</a></p>
+<h3 id="Mutual-encouragement"><a href="#Mutual-encouragement" class="headerlink" title="Mutual encouragement"></a>Mutual encouragement</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">前方道路宽大，90后的我们在努力，web前端的历史书有我们接过书写，希望我们在前人的肩膀上，更上一层楼！！！</span><br></pre></td></tr></table></figure>
+
+<p>一起学习<a href="https://github.com/lgqyc1212"> gitHud</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">القرآن</span><br></pre></td></tr></table></figure>
+
+]]></content>
   </entry>
 </search>
