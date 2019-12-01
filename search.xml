@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2019/09/21/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>美好</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jQuery的ajax链式编程方法</title>
     <url>/2019/03/08/Vue%E4%BC%A0%E5%80%BC--%E4%B8%89%E7%A7%8D%E5%B8%B8%E7%94%A8/</url>
     <content><![CDATA[<h1 id="Vue传值总结"><a href="#Vue传值总结" class="headerlink" title="Vue传值总结"></a>Vue传值总结</h1><p>常见的三种方法：</p>
@@ -81,7 +105,7 @@
   </entry>
   <entry>
     <title>前后端交互方式</title>
-    <url>/2019/01/08/2019.11.22/</url>
+    <url>/2019/01/08/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="1、前后端交互的方式"><a href="#1、前后端交互的方式" class="headerlink" title="1、前后端交互的方式"></a>1、前后端交互的方式</h1><p>关于前后端交互的方式，应该是每个前端人员都应该掌握的技术，他是难点，同样也是重点。</p>
 <p>交互就是很多互联网平台追求打造的一个功能状态。通过某个具有交互功能的互联网平台，让用户在上面不仅可以获得相关资讯、信息或服务，还能使用户与用户之间或用户与平台之间相互交流与互动，从而碰撞出更多的创意、思想和需求等。</p>
 <p>交互 是指替换；互相；彼此。语出《京氏易传·震》：“震分阴阳，交互用事。”。。。</p>
